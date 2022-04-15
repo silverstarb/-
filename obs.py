@@ -18,8 +18,6 @@ async def on_ready():
   print("봇 이름:",client.user.name,"봇 아이디:",client.user.id,"봇 버전:",discord.__version__)
 
 
-client.run(os.environ['token'])
-
 @bot.command()
 async def 안녕(ctx):
 await ctx.channel.send(f'{ctx.message.author.mention}님, 나도 안녕!'', reference=ctx.message)
@@ -45,4 +43,42 @@ isFrozen = True
 await ctx.message.delete()
 await ctx.channel.send('> ' + ctx.author.name + '님이 채팅창을 얼렸습니다.')
 
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))
+    
+#run.py
+import discord
 
+client = discord.Client()  
+
+@client.event
+async def on_ready():
+    print('We have logged in as {0.user}'.format(client))  
+
+@client.event
+async def on_message(message):
+    if message.author == client.user: # 봇 자신이 보내는 메세지는 무시
+        return
+
+    if message.content == '$hello': # 만약 채팅이 '안녕'라면
+        await message.channel.send('Hello!') # 나도안녕!라고 보내기
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+    	await ctx.send("명령어를 찾지 못했습니다")
+     
+@bot.command()
+async def join(ctx)
+	if ctx.author.voice and ctx.author.voice.channel:
+    	channel = ctx.author.voice.channel
+    	await channel.connect()
+    else:
+    	await ctx.send("음성채널 없음")  
+
+@bot.command()
+async def leave(ctx):
+	await bot.voice_clients[0].disconnect()
+         
+client.run(os.environ['token'])  
