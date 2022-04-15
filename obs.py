@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 
-client = commands.Bot(command_prefix = '-')
+client = commands.Bot(command_prefix='!')
 
 @client.event
 async def on_ready():
@@ -19,3 +19,30 @@ async def on_ready():
 
 
 client.run(os.environ['token'])
+
+@bot.command()
+async def 안녕(ctx):
+await ctx.channel.send(f'{ctx.message.author.mention}님, 나도 안녕!'', reference=ctx.message)
+
+@bot.command()
+async def 안녕(ctx):
+dm_channel = await ctx.message.author.create_dm()
+await dm_channel.send(f'{ctx.message.author.mention}님, 나도 안녕!')
+
+@bot.command()
+async def 삭제(ctx):
+await ctx.message.delete()
+await ctx.channel.send('메세지를 삭제했어요.')
+
+@bot.command()
+async def 얼리기(ctx):
+global isFrozen
+if isFrozen:
+await ctx.message.delete()
+await ctx.channel.send('> 이미 채팅창이 얼어있습니다.')
+else:
+isFrozen = True
+await ctx.message.delete()
+await ctx.channel.send('> ' + ctx.author.name + '님이 채팅창을 얼렸습니다.')
+
+
