@@ -17,5 +17,11 @@ async def on_ready():
   
   print("봇 이름:",client.user.name,"봇 아이디:",client.user.id,"봇 버전:",discord.__version__)
 
+@client.event
+async def on_message(message):
+    if message.content.startswith("안녕"):
+        await message.channel.send("안녕하세요")
+
+
 
 client.run(os.environ['OTY0MzU1OTgyMDYwODIyNjM4.Yljcfg.N7OZY_8mtesbgYD1eTvAr-bec0Q'])
