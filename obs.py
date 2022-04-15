@@ -81,4 +81,6 @@ async def join(ctx)
 async def leave(ctx):
 	await bot.voice_clients[0].disconnect()
          
-client.run(os.environ['token'])  
+client.run(os.environ['token'])
+  
+client.run('token')
