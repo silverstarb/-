@@ -22,6 +22,9 @@ async def on_message(message):
     if message.content.startswith("안녕"):
         await message.channel.send("안녕하세요")
 
+@client.event
+async def on_message(message):
+    if message.content.startswith("옵하"):
+        await message.channel.send("{ctx.message.author.mention} 어서오고~")
 
-
-client.run(os.environ['OTY0MzU1OTgyMDYwODIyNjM4.Yljcfg.N7OZY_8mtesbgYD1eTvAr-bec0Q'])
+client.run(os.environ['토큰'])
